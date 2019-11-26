@@ -5,6 +5,9 @@ from django.shortcuts import get_object_or_404, render
 from .models import Song, Vote
 
 
+def player(request):
+    return render(request, 'dj/player.html')
+
 def queue(request):
     songs = Song.objects.all()
     context = {'songs': songs}
