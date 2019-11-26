@@ -1,3 +1,7 @@
 django
 # PostgreSQL requirements
 psycopg2
+# Social auth
+social-auth-app-django
+social-auth-backend-epita
+social-auth-core[openidconnect]
