@@ -9,6 +9,8 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- FontAwesome CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{% static 'dj/css/style.css' %}">
 
@@ -24,7 +26,16 @@
 
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-latest.js"></script>
+        <!-- Ajax -->
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: { 'X-CSRFToken': "{{ csrf_token }}" }
+            });
+        </script>
         <!-- Bootstrap JS -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- Custom JS -->
+        <script src="{% static 'dj/js/player.js' %}"></script>
+        <script src="{% static 'dj/js/vote.js' %}"></script>
     </body>
 </html>

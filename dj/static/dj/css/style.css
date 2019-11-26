@@ -3,3 +3,19 @@
     display: block;
     margin: 0 auto;
 }
+
+.vote_button {
+    color: green;
+}
+.vote_button::before {
+    font-family: "FontAwesome";
+    content: "\f087";
+}
+
+.unvote_button {
+    color: red;
+}
+.unvote_button::before {
+    font-family: "FontAwesome";
+    content: "\f088";
+}

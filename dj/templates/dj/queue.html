@@ -1,8 +1,10 @@
 {% extends 'dj/base.html' %}
+{% load utils %}
 
 {% block title %}Queue{% endblock %}
 
 {% block content %}
+
 {% if songs %}
 <div class="table-responsive-md">
     <table class="table table-hover">
@@ -19,8 +21,8 @@
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
                 <td><a href="{% url 'dj:song' song.yt_id %}">{{ song.title }}</a></td>
-                <td>{{ song.get_nb_votes }}</td>
-                <td>+ / ❤</td>
+                <td id="nbvotes{{ song.yt_id }}">{% get_nb_votes song %}</td>
+                <td>{% include 'dj/vote_button.html' %}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -29,4 +31,5 @@
 {% else %}
 <p>No songs are available.</p>
 {% endif %}
+
 {% endblock %}

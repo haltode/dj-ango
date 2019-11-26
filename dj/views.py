@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 
 from .models import Song, Vote
+from .templatetags.utils import get_nb_votes
 
 
 def player(request):
@@ -10,7 +11,7 @@ def player(request):
 
 def queue(request):
     songs = Song.objects.all()
-    sorted_songs = sorted(songs, key=lambda x: x.get_nb_votes(), reverse=True)
+    sorted_songs = sorted(songs, key=lambda s: get_nb_votes(s), reverse=True)
     context = {'songs': sorted_songs}
     return render(request, 'dj/queue.html', context)
 
@@ -19,6 +20,7 @@ def song(request, yt_id):
     context = {'song': song}
     return render(request, 'dj/song.html', context)
 
+# API only used with Ajax so it returns a JSON not HTML
 @login_required
 def vote(request, yt_id):
     song = get_object_or_404(Song, yt_id=yt_id)
@@ -26,7 +28,11 @@ def vote(request, yt_id):
     # Voting twice undoes the first vote
     if not created:
         vote.delete()
-        return HttpResponse('Unvote successful')
     else:
         vote.save()
-        return HttpResponse('Vote successful')
+
+    res = {
+        'nb_votes': get_nb_votes(song),
+        'is_upvote': created,
+    }
+    return JsonResponse(res)
