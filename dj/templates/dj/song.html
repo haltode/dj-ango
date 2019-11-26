@@ -1,0 +1,9 @@
+<h1>{{ song.title }}</h1>
+
+<ul>
+    <li>author: {{ song.author }}</li>
+    <li>duration: {{ song.duration }}</li>
+    <li>id: {{ song.yt_id }}</li>
+    <li>votes: {{ song.get_nb_votes }}</li>
+    <li>suggester: {{ song.suggester.username }}</li>
+</ul>

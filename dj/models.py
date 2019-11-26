@@ -14,6 +14,10 @@ class Song(models.Model):
     def __str__(self):
         return f'{self.title} - {self.author} ({self.duration}s)'
 
+    def get_nb_votes(self):
+        votes = Vote.objects.filter(song=self)
+        return len(votes)
+
 class Vote(models.Model):
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

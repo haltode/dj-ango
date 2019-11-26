@@ -1,0 +1,11 @@
+{% if songs %}
+<ul>
+    {% for song in songs %}
+    <li><a href="{% url 'dj:song' song.yt_id %}">{{ song.title }}</a> <a
+           href="{% url 'dj:vote' song.yt_id %}">vote</a>
+        ({{ song.get_nb_votes }} votes)</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No songs are available.</p>
+{% endif %}
