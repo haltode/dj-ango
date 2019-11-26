@@ -1,3 +1,8 @@
+{% extends 'dj/base.html' %}
+
+{% block title %}Queue{% endblock %}
+
+{% block content %}
 {% if songs %}
 <ul>
     {% for song in songs %}
@@ -9,3 +14,4 @@
 {% else %}
 <p>No songs are available.</p>
 {% endif %}
+{% endblock %}

@@ -1,9 +1,14 @@
-<h1>{{ song.title }}</h1>
+{% extends 'dj/base.html' %}
 
+{% block title %}Song details{% endblock %}
+
+{% block content %}
 <ul>
+    <li>title: {{ song.title}}</li>
     <li>author: {{ song.author }}</li>
     <li>duration: {{ song.duration }}</li>
     <li>id: {{ song.yt_id }}</li>
     <li>votes: {{ song.get_nb_votes }}</li>
     <li>suggester: {{ song.suggester.username }}</li>
 </ul>
+{% endblock %}

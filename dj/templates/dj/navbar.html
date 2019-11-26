@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'dj:queue' %}">dj-ango</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        {% if user.is_authenticated %}
+        <div class="collapse navbar-collapse" id="mainMenu">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'dj:queue' %}">Vote</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">My songs</a></li>
+                {% if user.is_staff %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="adminMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                    <div class="dropdown-menu" aria-labelledby="adminMenu">
+                        <a class="dropdown-item" href="{% url 'admin:index' %}">Django panel</a>
+                        <a class="dropdown-item" href="#">Skip song</a>
+                    </div>
+                </li>
+                {% endif %}
+            </ul>
+            <span class="navbar-text">{{ user.username }}</span><a href="{% url 'logout' %}">logout</a>
+        </div>
+        {% endif %}
+    </div>
+</nav>
