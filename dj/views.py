@@ -10,7 +10,8 @@ def player(request):
 
 def queue(request):
     songs = Song.objects.all()
-    context = {'songs': songs}
+    sorted_songs = sorted(songs, key=lambda x: x.get_nb_votes(), reverse=True)
+    context = {'songs': sorted_songs}
     return render(request, 'dj/queue.html', context)
 
 def song(request, yt_id):

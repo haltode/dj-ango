@@ -4,13 +4,28 @@
 
 {% block content %}
 {% if songs %}
-<ul>
-    {% for song in songs %}
-    <li><a href="{% url 'dj:song' song.yt_id %}">{{ song.title }}</a> <a
-           href="{% url 'dj:vote' song.yt_id %}">vote</a>
-        ({{ song.get_nb_votes }} votes)</li>
-    {% endfor %}
-</ul>
+<div class="table-responsive-md">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col" style="width: 5%">#</th>
+                <th scope="col" style="width: 75%">Name</th>
+                <th scope="col" style="width: 10%">Votes</th>
+                <th scope="col" style="width: 10%">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for song in songs %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td><a href="{% url 'dj:song' song.yt_id %}">{{ song.title }}</a></td>
+                <td>{{ song.get_nb_votes }}</td>
+                <td>+ / ❤</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% else %}
 <p>No songs are available.</p>
 {% endif %}
