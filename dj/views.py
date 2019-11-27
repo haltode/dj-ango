@@ -1,5 +1,7 @@
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 
@@ -52,26 +54,38 @@ def suggest(request):
             'part': 'contentDetails,snippet',
             'key': settings.YOUTUBE_API_KEY,
         }
-        req = requests.get(url=url, params=params)
 
-        json = req.json()['items'][0]
+        req = requests.get(url=url, params=params)
+        json = req.json()['items']
+        if not json:
+            return None
+
         meta = {
-            'title': json['snippet']['title'],
-            'author': json['snippet']['channelTitle'],
-            'duration': json['contentDetails']['duration'],
+            'title': json[0]['snippet']['title'],
+            'author': json[0]['snippet']['channelTitle'],
+            'duration': json[0]['contentDetails']['duration'],
         }
         return meta
 
     # The video id is stored in the HTML form
     yt_id = request.POST['yt_id']
     meta = get_metadata(yt_id)
-    # TODO: check for error
-    song = Song(
-        title=meta['title'],
-        author=meta['author'],
-        duration=meta['duration'],
-        yt_id=yt_id,
-        suggester=request.user
-    )
-    song.save()
-    return redirect('dj:queue')
+    if not meta:
+        messages.error(request, 'Invalid video id.')
+    else:
+        song = Song(
+            title=meta['title'],
+            author=meta['author'],
+            duration=meta['duration'],
+            yt_id=yt_id,
+            suggester=request.user
+        )
+        try:
+            song.full_clean()
+            song.save()
+            messages.success(request, 'Song added.')
+        except ValidationError as err:
+            err = '; '.join(err.messages)
+            messages.error(request, err)
+
+    return redirect('dj:mysongs')

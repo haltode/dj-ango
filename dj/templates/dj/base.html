@@ -19,6 +19,8 @@
     </head>
 
     <body>
+        {% include 'dj/messages.html' %}
+
         <div class="container">
             <h1>{% block title %}{% endblock %}</h1>
             {% block content %}{% endblock %}
