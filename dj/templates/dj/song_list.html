@@ -1,0 +1,28 @@
+{% load utils %}
+
+{% if songs %}
+<div class="table-responsive-md">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col" style="width: 5%">#</th>
+                <th scope="col" style="width: 75%">Name</th>
+                <th scope="col" style="width: 10%">Votes</th>
+                <th scope="col" style="width: 10%">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for song in songs|sort_songs_by_vote %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td><a href="{% url 'dj:song' song.yt_id %}">{{ song.title }}</a></td>
+                <td id="nbvotes{{ song.yt_id }}">{% get_nb_votes song %}</td>
+                <td>{% include 'dj/vote_button.html' %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+    <p>No songs are available.</p>
+{% endif %}

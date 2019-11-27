@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 
 from dj.models import Song, Vote
-from dj.queue import get_current_song, get_songs_sorted_by_vote
+from dj.queue import get_current_song
 from dj.templatetags.utils import get_nb_votes, elapsed_since
 
 import requests
@@ -16,11 +16,14 @@ def player(request):
     return render(request, 'dj/player.html')
 
 def queue(request):
-    context = {'songs': get_songs_sorted_by_vote()}
+    songs = Song.objects.all()
+    context = {'songs': songs}
     return render(request, 'dj/queue.html', context)
 
 def mysongs(request):
-    return render(request, 'dj/mysongs.html')
+    mines = Song.objects.filter(suggester=request.user)
+    context = {'songs': mines}
+    return render(request, 'dj/mysongs.html', context)
 
 def state(request):
     song = get_current_song()
