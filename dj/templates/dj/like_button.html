@@ -1,0 +1,5 @@
+{% load utils %}
+
+{% has_like song user as already_liked %}
+<a href="#" onclick="like('{{ song.yt_id }}');" id="likeicon{{ song.yt_id }}"
+    class="{% if already_liked %}unlike_button{% else %}like_button{% endif %}"></a>

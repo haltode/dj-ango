@@ -10,5 +10,6 @@ urlpatterns = [
     path('state/', views.state, name='state'),
     path('song/<str:yt_id>/', views.song, name='song'),
     path('vote/<str:yt_id>/', views.vote, name='vote'),
+    path('like/<str:yt_id>/', views.like, name='like'),
     path('suggest/', views.suggest, name='suggest'),
 ]

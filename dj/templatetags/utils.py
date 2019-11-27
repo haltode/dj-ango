@@ -1,7 +1,7 @@
 from django import template
 from django.utils import timezone
 
-from dj.models import Vote
+from dj.models import Vote, Like
 
 from datetime import timedelta
 
@@ -30,4 +30,12 @@ def has_vote(song, user):
         Vote.objects.get(song=song, user=user)
         return True
     except Vote.DoesNotExist:
+        return False
+
+@register.simple_tag
+def has_like(song, user):
+    try:
+        Like.objects.get(song=song, user=user)
+        return True
+    except Like.DoesNotExist:
         return False

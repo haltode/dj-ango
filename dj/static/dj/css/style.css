@@ -19,3 +19,19 @@
     font-family: "FontAwesome";
     content: "\f088";
 }
+
+.like_button {
+    color: grey;
+}
+.like_button::before {
+    font-family: "FontAwesome";
+    content: "\f004";
+}
+
+.unlike_button {
+    color: red;
+}
+.unlike_button::before {
+    font-family: "FontAwesome";
+    content: "\f004";
+}

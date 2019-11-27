@@ -17,7 +17,7 @@
                 <th scope="row">{{ forloop.counter }}</th>
                 <td><a href="{% url 'dj:song' song.yt_id %}">{{ song.title }}</a></td>
                 <td id="nbvotes{{ song.yt_id }}">{% get_nb_votes song %}</td>
-                <td>{% include 'dj/vote_button.html' %}</td>
+                <td>{% include 'dj/vote_button.html' %} / {% include 'dj/like_button.html' %}</td>
             </tr>
             {% endfor %}
         </tbody>

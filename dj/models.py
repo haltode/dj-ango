@@ -26,3 +26,15 @@ class Vote(models.Model):
 
     def __str__(self):
         return f'{self.user} voted for {self.song}'
+
+class Like(models.Model):
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['song', 'user'], name='unique like')
+        ]
+
+    def __str__(self):
+        return f'{self.user} liked {self.song}'

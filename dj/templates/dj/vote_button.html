@@ -1,5 +1,5 @@
 {% load utils %}
 
 {% has_vote song user as already_voted %}
-<a href="#" onclick="vote('{{ song.yt_id }}');" id="icon{{ song.yt_id }}"
+<a href="#" onclick="vote('{{ song.yt_id }}');" id="voteicon{{ song.yt_id }}"
     class="{% if already_voted %}unvote_button{% else %}vote_button{% endif %}"></a>
