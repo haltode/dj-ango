@@ -9,7 +9,7 @@ var songYtId = null;
 var songStartTime = 0;
 
 function updateCurrentSong(_callback) {
-    $.getJSON("/dj/state", function(data) {
+    $.getJSON("/state", function(data) {
         songYtId = data.yt_id;
         songStartTime = data.elapsed;
         // We need to wait for the current function to finish
