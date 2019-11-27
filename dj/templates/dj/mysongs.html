@@ -1,0 +1,9 @@
+{% extends 'dj/base.html' %}
+
+{% block content %}
+<form action="{% url 'dj:suggest' %}" method="post">
+    {% csrf_token %}
+    Video ID: <input type="text" name="yt_id"><br>
+    <input type="submit" value="Add song">
+</form>
+{% endblock %}
