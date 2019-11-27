@@ -7,6 +7,7 @@ class Song(models.Model):
     author = models.CharField(max_length=256)
     duration = models.DurationField()
     is_playing = models.BooleanField(default=False)
+    start_time = models.DateTimeField(null=True, blank=True)
 
     yt_id = models.CharField(max_length=11, unique=True)
     suggester = models.ForeignKey(User, on_delete=models.CASCADE)

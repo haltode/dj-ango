@@ -1,9 +1,18 @@
 from django import template
+from django.utils import timezone
 
 from dj.models import Vote
 
+from datetime import timedelta
+
 register = template.Library()
 
+
+@register.filter
+def elapsed_since(start):
+    end = timezone.now()
+    delta = (end - start).total_seconds()
+    return timedelta(seconds=int(delta))
 
 @register.simple_tag
 def get_nb_votes(song):

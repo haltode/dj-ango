@@ -5,8 +5,9 @@ from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 
-from .models import Song, Vote
-from .templatetags.utils import get_nb_votes
+from dj.models import Song, Vote
+from dj.queue import get_current_song, get_songs_sorted_by_vote
+from dj.templatetags.utils import get_nb_votes, elapsed_since
 
 import requests
 
@@ -15,18 +16,27 @@ def player(request):
     return render(request, 'dj/player.html')
 
 def queue(request):
-    songs = Song.objects.all()
-    sorted_songs = sorted(songs, key=lambda s: get_nb_votes(s), reverse=True)
-    context = {'songs': sorted_songs}
+    context = {'songs': get_songs_sorted_by_vote()}
     return render(request, 'dj/queue.html', context)
+
+def mysongs(request):
+    return render(request, 'dj/mysongs.html')
+
+def state(request):
+    song = get_current_song()
+    if not song:
+        return JsonReponse('')
+    else:
+        res = {
+            'yt_id': song.yt_id,
+            'elapsed': elapsed_since(song.start_time).total_seconds(),
+        }
+        return JsonResponse(res)
 
 def song(request, yt_id):
     song = get_object_or_404(Song, yt_id=yt_id)
     context = {'song': song}
     return render(request, 'dj/song.html', context)
-
-def mysongs(request):
-    return render(request, 'dj/mysongs.html')
 
 # API only used with Ajax so it returns a JSON not HTML
 @login_required
