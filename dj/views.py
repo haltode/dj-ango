@@ -43,10 +43,10 @@ def state(request):
         }
         return JsonResponse(res)
 
-def song(request, yt_id):
+def info(request, yt_id):
     song = get_object_or_404(Song, yt_id=yt_id)
     context = {'song': song}
-    return render(request, 'dj/song.html', context)
+    return render(request, 'dj/info.html', context)
 
 @login_required
 def vote(request, yt_id):
