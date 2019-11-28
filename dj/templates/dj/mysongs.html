@@ -9,6 +9,9 @@
 </form>
 
 <h1>My songs</h1>
-{% include 'dj/song_list.html' %}
+{% include 'dj/song_list.html' with songs=mines %}
+
+<h1>Liked songs</h1>
+{% include 'dj/song_list.html' with songs=likes %}
 
 {% endblock %}
