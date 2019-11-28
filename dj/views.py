@@ -28,7 +28,7 @@ def mysongs(request):
 def state(request):
     song = get_current_song()
     if not song:
-        return JsonReponse('')
+        return JsonResponse({})
     else:
         res = {
             'yt_id': song.yt_id,
