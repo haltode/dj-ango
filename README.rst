@@ -43,3 +43,20 @@ Website
 
     # Running
     (venv) $ python manage.py runserver
+
+Testing
+-------
+
+Here is a dump of a test database: https://haltode.fr/upload/cisco-test.pgsql
+
+To import it, use:
+
+.. code:: bash
+
+    $ createdb cisco
+    $ psql cisco < cisco-test.pgsql
+
+You can log in with:
+
+- `admin` account (password: `admin`)
+- users accounts such as `acu1` or `ing1-1` (password: `dj-ango-test`)
