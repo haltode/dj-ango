@@ -10,6 +10,11 @@ SECRET_KEY = 'CHANGEME'
 
 YOUTUBE_API_KEY = 'CHANGEME'
 
+ALLOWED_HOSTS = ['127.0.0.1', '::1', 'localhost']
+SITE_HOST = 'localhost:8000'
+
+STATIC_ROOT = '/path/to/static/dir'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

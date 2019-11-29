@@ -1,6 +1,6 @@
 django
 # PostgreSQL requirements
-psycopg2
+psycopg2-binary
 # Social auth
 social-auth-app-django
 social-auth-backend-epita
