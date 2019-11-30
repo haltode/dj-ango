@@ -5,12 +5,16 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        {% if user.is_authenticated %}
         <div class="collapse navbar-collapse" id="mainMenu">
             <ul class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'dj:queue' %}">Vote</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'dj:suggest' %}">Suggest</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'dj:mysongs' %}">My songs</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'dj:queue' %}">Queue</a></li>
+                {% endif %}
+
                 {% if user.is_staff %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="adminMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
@@ -21,8 +25,9 @@
                 </li>
                 {% endif %}
             </ul>
+            {% if user.is_authenticated %}
             <span class="navbar-text">{{ user.username }}</span><a href="{% url 'logout' %}">logout</a>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 </nav>

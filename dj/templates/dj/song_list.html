@@ -10,7 +10,9 @@
                 <th scope="col" style="width: 25%">Author</th>
                 <th scope="col" style="width: 10%">Duration</th>
                 <th scope="col" style="width: 5%">Votes</th>
+                {% if user.is_authenticated %}
                 <th scope="col" style="width: 5%">Actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -21,7 +23,9 @@
                 <td>{{ song.author }}</td>
                 <td>{{ song.duration|format_duration }}</td>
                 <td id="nbvotes{{ song.yt_id }}">{% get_nb_votes song %}</td>
+                {% if user.is_authenticated %}
                 <td>{% include 'dj/vote_button.html' %} / {% include 'dj/like_button.html' %}</td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
