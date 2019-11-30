@@ -6,9 +6,11 @@
         <thead>
             <tr>
                 <th scope="col" style="width: 5%">#</th>
-                <th scope="col" style="width: 75%">Name</th>
-                <th scope="col" style="width: 10%">Votes</th>
-                <th scope="col" style="width: 10%">Actions</th>
+                <th scope="col" style="width: 50%">Name</th>
+                <th scope="col" style="width: 25%">Author</th>
+                <th scope="col" style="width: 10%">Duration</th>
+                <th scope="col" style="width: 5%">Votes</th>
+                <th scope="col" style="width: 5%">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +18,8 @@
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ song.title }}</td>
+                <td>{{ song.author }}</td>
+                <td>{{ song.duration|format_duration }}</td>
                 <td id="nbvotes{{ song.yt_id }}">{% get_nb_votes song %}</td>
                 <td>{% include 'dj/vote_button.html' %} / {% include 'dj/like_button.html' %}</td>
             </tr>
