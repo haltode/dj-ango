@@ -1,5 +1,5 @@
 function like(yt_id) {
-    $.ajax({url: '/like/' + yt_id + '/', type: 'post'})
+    $.ajax({url: '/api/like/' + yt_id + '/', type: 'post'})
         .done(function (data) {
             // Update like icon
             var icon = $("#likeicon" + yt_id);

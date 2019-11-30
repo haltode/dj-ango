@@ -1,5 +1,5 @@
 function vote(yt_id) {
-    $.ajax({url: '/vote/' + yt_id + '/', type: 'post'})
+    $.ajax({url: '/api/vote/' + yt_id + '/', type: 'post'})
         .done(function (data) {
             // Update vote count
             $("#nbvotes" + yt_id).text(data.nb_votes)
