@@ -9,6 +9,7 @@
         <div class="collapse navbar-collapse" id="mainMenu">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="{% url 'dj:queue' %}">Vote</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'dj:suggest' %}">Suggest</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'dj:mysongs' %}">My songs</a></li>
                 {% if user.is_staff %}
                 <li class="nav-item dropdown">
