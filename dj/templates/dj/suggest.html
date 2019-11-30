@@ -5,7 +5,7 @@
 {% block content %}
 <form action="{% url 'dj:suggest' %}" method="post">
     {% csrf_token %}
-    Video ID: <input type="text" name="yt_id"><br>
+    Video URL: <input type="text" name="yt_url" size="50"><br>
     <input type="submit" value="Add song">
 </form>
 {% endblock %}

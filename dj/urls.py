@@ -12,6 +12,6 @@ urlpatterns = [
     path('api/vote/<str:yt_id>/', api.vote, name='vote'),
     path('api/like/<str:yt_id>/', api.like, name='like'),
     path('api/get_song/<str:yt_id>/', api.get_song, name='get_song'),
-    path('api/add_song/<str:yt_id>/', api.add_song, name='add_song'),
+    path('api/add_song/<str:yt_url>/', api.add_song, name='add_song'),
     path('api/state/', api.state, name='state'),
 ]

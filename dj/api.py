@@ -51,7 +51,8 @@ def get_song(request, yt_id):
 
 @login_required
 @require_POST
-def add_song(request, yt_id):
+def add_song(request, yt_url):
+    yt_id = youtube.extract_video_id(yt_url)
     meta = youtube.get_video_metadata(yt_id)
     if not meta:
         err = f'Invalid video id: {yt_id}'

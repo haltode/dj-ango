@@ -1,7 +1,13 @@
 from django.conf import settings
 
+from urllib.parse import urlparse, parse_qs
 import requests
 
+
+def extract_video_id(yt_url):
+    url = urlparse(yt_url)
+    qs = parse_qs(url.query)
+    return qs['v'][0]
 
 def get_video_metadata(yt_id):
     url = 'https://www.googleapis.com/youtube/v3/videos'

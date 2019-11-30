@@ -18,8 +18,8 @@ def suggest(request):
     if request.method == 'GET':
         return render(request, 'dj/suggest.html')
     elif request.method == 'POST':
-        yt_id = request.POST['yt_id']
-        api.add_song(request, yt_id)
+        yt_url = request.POST['yt_url']
+        api.add_song(request, yt_url)
         return redirect('dj:suggest')
 
 @login_required
